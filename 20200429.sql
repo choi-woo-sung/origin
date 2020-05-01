@@ -29,6 +29,10 @@ FROM emp e JOIN emp m on(e.mgr = m.empno);
 위의 쿼리를 OUTER 조인으로 변경
 ( KING 직원이 조인에 실패해도 본인 정보에 대해서는 나오도록, 하지만 상급자 정보는 없기 때문에 나오지 않는다)
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 ANSI-SQL : OUTER
 SELECT m. empno, m.ename, e.empno, e.ename
 FROM emp e LEFT OUTER JOIN emp m ON (e.mgr =m.empno);
@@ -96,6 +100,7 @@ FROM buyprod;
 
 --OUTER JOIN 1
 SELECT buy_date, buy_prod, prod.prod_id, prod_name ,buy_qty
+<<<<<<< Updated upstream
 FROM prod LEFT OUTER JOIN buyprod ON (buyprod.buy_prod = prod.prod_id AND buyprod.buy_date=TO_DATE('2015/01/25','YYYY/MM/DD'));
 
 
@@ -104,6 +109,16 @@ SELECT TO_DATE('2015/01/25','YYYY/MM/DD'), buy_prod, prod.prod_id, prod_name ,bu
 FROM prod,buyprod
 WHERE buyprod.buy_prod(+) = prod.prod_id
 AND buy_date(+)=TO_DATE('2015/01/25','YYYY/MM/DD');
+=======
+FROM prod LEFT OUTER JOIN buyprod ON (buyprod.buy_prod = prod.prod_id AND buyprod.buy_date=TO_DATE('2005/01/25','YYYY/MM/DD'));
+
+
+--OUTER JOIN 2
+SELECT TO_DATE('2005/01/25' ,'YYYY/MM/DD') buy_date, buy_prod, prod.prod_id, prod_name ,buy_qty
+FROM prod,buyprod
+WHERE buyprod.buy_prod(+) = prod.prod_id
+AND buy_date(+)=TO_DATE('2005/01/25','YYYY/MM/DD');
+>>>>>>> Stashed changes
 
 
 --OUTER JOIN 3
@@ -118,14 +133,24 @@ FROM cycle, product
 WHERE product.pid =cycle.pid (+)
     AND cycle.cid(+) = 1;
 
+<<<<<<< Updated upstream
 SELECT product.PID ,PNM, NVL(cid,1) ,NVL(day,0),NVL(cnt,0)
 FROM cycle RIGHT OUTER JOIN product ON(product.pid = cycle.pid AND CYCLE.CID = 1 );
 
 -- OUTER JOIN 5
+=======
+
+-- OUTER JOIN 5
+SELECT  e.PID ,e.PNM, e.cid ,customer.cnm ,e.day,e.cnt
+FROM (SELECT product.PID PID ,PNM, NVL(cid,1) cid ,NVL(day,0)day,NVL(cnt,0) cnt
+FROM cycle RIGHT OUTER JOIN product ON(product.pid = cycle.pid AND CYCLE.CID = 1 ))e , customer
+WHERE e.cid = customer.cid;
+>>>>>>> Stashed changes
 
 
 
 
+<<<<<<< Updated upstream
 
 FROM(select product.PID ,PNM, NVL(cycle.cid,1),cnm , day, cnt
 FROM cycle, product,customer)
@@ -133,6 +158,8 @@ WHERE product.pid =cycle.pid(+)
     AND customer.cid(+) = cycle.cid
     AND cycle.cid(+) = 1
 ORDER BY  product.PID DESC;
+=======
+>>>>>>> Stashed changes
     
 
 
